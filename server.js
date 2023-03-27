@@ -1,13 +1,24 @@
 const express = require('express');
+const exphbs = require('express-handlebars')
+
 const app = express();
+
+app.engine('handlebars', exphbs.engine())
+app.set('view engine', 'handlebars')
+
+app.use(express.static("public"));
+
+// app.set('views', './views');
+
 const routes = require('./routes')
+app.use('/', routes)
+
 
 app.use(
     express.urlencoded({extended:true})
 );
 
-app.use(routes)
 
 app.listen(3000, ()=>{
-    console.log("o servidor está online")
+    console.log("o servidor está online na porta 3000")
 }); 
