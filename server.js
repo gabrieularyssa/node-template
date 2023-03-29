@@ -8,10 +8,10 @@ app.set('view engine', 'handlebars')
 
 app.use(express.static("public"));
 
-// app.set('views', './views');
+app.set('views', './views');
 
-const routes = require('./routes')
-app.use('/', routes)
+const router = require('./routes')
+app.use('/', router)
 
 
 app.use(
