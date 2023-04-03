@@ -1,10 +1,10 @@
 import express from "express";
-import { getAll, getUnique } from "../controllers/budgetController";
+import { getAllBudgets, getUniqueBudget } from "../controllers/budgetController";
 import { JWTChecker } from "../middlewares/JWTchecker";
 
-const BudgetRouter = express.Router();
+const budgetRouter = express.Router();
 
-BudgetRouter.get("/", JWTChecker.admin, getAll)
-BudgetRouter.get("/:id", JWTChecker.user, getUnique)
+budgetRouter.get("/", JWTChecker.admin, getAllBudgets)
+budgetRouter.get("/:id", JWTChecker.user, getUniqueBudget)
 
-module.exports = BudgetRouter
+module.exports = budgetRouter

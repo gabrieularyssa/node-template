@@ -2,7 +2,8 @@ const express = require('express');
 const app = express();
 
 const exphbs = require('express-handlebars')
-const BudgetRouter = require('./src/routes/budgets.js')
+const budgetRouter = require('./src/routes/budgets.js')
+const userRouter = require('./src/routes/users.js')
 const router = require('./public/routes.js')
 
 app.use(
@@ -19,8 +20,8 @@ app.use(express.static("public"));
 
 //setting routers
 app.use('/', router)
-app.use('/budgets/', BudgetRouter)
-
+app.use('/budgets/', budgetRouter)
+app.use('/users/', userRouter)
 
 app.listen(3000, ()=>{
     console.log("o servidor está online na porta 3000")

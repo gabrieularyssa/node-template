@@ -1,11 +1,11 @@
-const budgetService = require('../services/budgetService.js')
+const userService = require('../services/userService.js')
 
-exports.getAllBudgets = async (req, res) => {
+exports.getAllUsers = async (req, res) => {
 
-    console.log("Controller: Get All")
+    console.log("Controller User: Get All")
     try {
 
-        data = budgetService.selectAll()
+        data = userService.selectAll()
         return res.status(200).json(data)
 
     } catch(err) {
@@ -14,17 +14,16 @@ exports.getAllBudgets = async (req, res) => {
 
     }
     
-    
 }
 
-exports.getUniqueBudget = async (req, res) => {
+exports.getUniqueUser = async (req, res) => {
 
-
-    console.log("Controller: Get unique")
+    
+    console.log("Controller User: Get unique")
     const id = req.params.id;
     try {
 
-        data = budgetService.selectUnique(id)
+        data = userService.selectUnique(id)
         return res.status(200).json(data)
 
     } catch(err) {
