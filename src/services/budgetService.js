@@ -7,7 +7,6 @@ budgetService = {
         console.log("Service: selecionando todos os usuários do Banco de Dados")
         let data;
         const query = 'SELECT * FROM budgets'
-        
         pool.getConnection((err, connection) => {
             if (err) throw err
             connection.query(query, (err, results) => {
@@ -37,6 +36,17 @@ budgetService = {
         })
         
         return data
+
+    },
+
+    insertBudget: async () => {
+
+        console.log("Service: inserindo o orçamento no banco de dados")
+        const size = req.body.size
+        const description = req.body.description
+        const style = req.body.style
+        const color = req.body.color
+        const query = `INSERT INTO budgets (size, description, style, color) VALUES ('${size}','${description}', '${style}', '${color}')`
 
     }
 
