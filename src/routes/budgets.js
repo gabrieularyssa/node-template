@@ -6,6 +6,6 @@ const budgetRouter = express.Router();
 
 budgetRouter.get("/", JWTChecker.admin, getAllBudgets)
 budgetRouter.get("/:id", JWTChecker.user, getUniqueBudget)
-budgetRouter.post("/orcamento", JWTChecker.user, postBudget) 
+budgetRouter.post("/", JWTChecker.user, postBudget) 
 
 module.exports = budgetRouter
