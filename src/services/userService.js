@@ -1,41 +1,53 @@
+const pool = require('../database/connection.js')
+
 userService = {
 
     selectAll :  async () => {
 
-        console.log("Service: selecionando todos os usuários do Banco de Dados")
-        let data;
+        console.log("Service: selecionando todos os usuários do Banco de Dados")        
         const query = 'SELECT * FROM users'
-        
-        pool.getConnection((err, connection) => {
-            if (err) throw err
-            connection.query(query, (err, results) => {
-                data = results
-                connection.release()
-                if (err) throw err;
-            })
-        })
-        
-        return data
-    
+
+        try {
+                      
+            const data = await pool.query(query) 
+            return data.rows    
+
+        } catch(err) {
+
+            throw err
+
+        }
     },
 
-    selectUnique: async () => {
+    selectUnique: async (id) => {
 
         console.log("Service: selecionando unidade")
-        let data;
-        const query = `SELECT * FROM users WHERE id=${id}`
 
-        pool.getConnection((err, connection) => {
-            if (err) throw err
-            connection.query(query, (err, results) => {
-                data = results
-                connection.release()
-                if (err) throw err;
-            })
+        const query = 'SELECT * FROM users WHERE id=$1'
+        const values = [id]
 
-        })
+        try {
+
+            const data = await pool.query(query, values)        
+            return data.rows
+
+        } catch(err) {
+
+            throw err
+
+        }
         
-        return data
+    },
+
+    postNew: async (user) => {
+
+        console.log("Service: criando cliente")
+
+        const query = "INSERT INTO users (name, email, password, phone, is_admin, created_at) VALUES ($1, $2, $3, $4, $5, (NOW() AT TIME ZONE 'America/Sao_Paulo')) RETURNING *"
+        const values = [user.name, user.email, user.password, user.phone, user.is_admin]
+
+        const data = await pool.query(query, values)
+        return data.rows        
 
     }
 

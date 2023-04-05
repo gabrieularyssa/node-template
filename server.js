@@ -1,14 +1,14 @@
 const express = require('express');
 const app = express();
 
+const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars')
 const budgetRouter = require('./src/routes/budgets.js')
 const userRouter = require('./src/routes/users.js')
 const router = require('./public/routes.js')
 
-app.use(
-    express.urlencoded({extended:true})
-);
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 //setting engine and views
 app.engine('handlebars', exphbs.engine())
