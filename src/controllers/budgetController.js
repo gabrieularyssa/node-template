@@ -34,3 +34,27 @@ exports.getUniqueBudget = async (req, res) => {
     }
 
 }
+
+exports.postBudget = async (req, res) => {
+
+    console.log("Controller: Post budget")
+    
+    const budget = {
+        size: req.body.size,
+        description: req.body.description,
+        style: req.body.style,
+        color: req.body.color
+    }
+
+    try{
+
+        data = budgetService.insertBudget(budget)
+        res.status(201).json(data)
+
+    } catch(err) {
+
+        return res.status(400).json({message: "Controller Error: bad request", err: err})
+
+    }
+
+}

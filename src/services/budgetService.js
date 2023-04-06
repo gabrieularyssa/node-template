@@ -23,15 +23,15 @@ budgetService = {
 
     },
 
-    insertBudget: async () => {
+    insertBudget: async (budget) => {
 
         console.log("Service: inserindo o orçamento no banco de dados")
-        const size = req.body.size
-        const description = req.body.description
-        const style = req.body.style
-        const color = req.body.color
-        const query = `INSERT INTO budgets (size, description, style, color) VALUES ('${size}','${description}', '${style}', '${color}')`
+               
+        const query = "INSERT INTO budgets (size, description, style, color) VALUES ($1, $2, $3, $4, (NOW() AT TIME ZONE 'America/Sao_Paulo')) RETURNING *"
+        const values = [budget.size, budget.description, budget.style, budget.color]
 
+        const data = await pool.query(query, values)
+        return data.rows
     }
 
 }
