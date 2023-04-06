@@ -9,6 +9,6 @@ const userRouter = express.Router();
 
 userRouter.get("/", JWTChecker.admin, getAllUsers)
 userRouter.get("/:id", JWTChecker.user, getUniqueUser)
-userRouter.post('/', userValidator, passwordValidator, validate, postUser )
+userRouter.post('/', userValidator, passwordValidator, validate, postNewUser)
 
 module.exports = userRouter

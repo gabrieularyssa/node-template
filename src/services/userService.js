@@ -51,18 +51,6 @@ userService = {
 
     }
 
-    /* 
-        SELECT users.*, budget.status
-        FROM users 
-        LEFT JOIN budgets
-        ON users.id = budgets.user_id
-        WHERE budgets.id = (SELECT id
-                            FROM budgets
-                            WHERE user_id = users.id
-                            ORDER BY created_at DESC
-                            LIMIT 1)
-    */
-
 }
 
 module.exports = userService
