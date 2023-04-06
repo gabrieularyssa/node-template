@@ -1,5 +1,5 @@
 const userService = require('../services/userService.js')
-const userValidator = require('../services/userValidator.js')
+import { validationResult } from 'express-validator'
 
 exports.getAllUsers = async (req, res) => {
 
@@ -38,6 +38,10 @@ exports.getUniqueUser = async (req, res) => {
 exports.postUser = async (req, res) => {
 
     console.log("Controller User: Criando novo usuário")
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
+
+
     const user = {
         name: req.body.name,
         email: req.body.email,        

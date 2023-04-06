@@ -1,7 +1,7 @@
 const { body } = require('express-validator')
 
 
-const userValidator = (req, res, next) => {
+exports.userValidator = (req, res, next) => {
 
     body('name').trim().isLength({ min: 2, max: 150 }).matches(/^[a-zA-ZÀ-ú\s]+$/).withMessage('O nome deve conter apenas letras, acentos e espaços em branco')
     body('email').trim().isEmail().withMessage('E-mail inválido')
@@ -9,5 +9,3 @@ const userValidator = (req, res, next) => {
     next()
 
 }
-
-module.exports = userValidator
